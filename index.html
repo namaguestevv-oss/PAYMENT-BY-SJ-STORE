@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Payment SJ Storee</title>
+
+<style>
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: linear-gradient(135deg, #3b2416, #6b442a);
+        color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+    }
+
+    .container {
+        width: 90%;
+        max-width: 420px;
+        background: rgba(0,0,0,0.25);
+        padding: 25px;
+        border-radius: 18px;
+        text-align: center;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        backdrop-filter: blur(8px);
+    }
+
+    .love {
+        font-size: 30px;
+        color: hotpink;
+        margin-bottom: 10px;
+    }
+
+    h1 {
+        font-size: 16px;
+        margin-bottom: 20px;
+        letter-spacing: 0.5px;
+    }
+
+    .payment {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: rgba(255,255,255,0.08);
+        padding: 14px;
+        border-radius: 12px;
+        margin: 12px 0;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    .payment:hover {
+        background: rgba(255,255,255,0.18);
+        transform: scale(1.02);
+    }
+
+    .left {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        text-align: left;
+    }
+
+    .logo {
+        width: 38px;
+        height: 38px;
+        border-radius: 10px;
+        background: white;
+        padding: 4px;
+    }
+
+    .btn {
+        font-size: 12px;
+        padding: 6px 10px;
+        background: #f5c16c;
+        color: #3b2416;
+        border-radius: 8px;
+        font-weight: bold;
+    }
+
+    small {
+        opacity: 0.8;
+    }
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="love">💗</div>
+
+    <h1>welcome to payment by sj storee</h1>
+
+    <!-- DANA -->
+    <div class="payment" onclick="openPayment('dana','083116757664')">
+        <div class="left">
+            <img class="logo" src="https://upload.wikimedia.org/wikipedia/commons/7/72/Logo_dana_blue.svg">
+            <div>
+                <b>DANA</b><br>
+                <small>083116757664</small>
+            </div>
+        </div>
+        <div class="btn">PAY</div>
+    </div>
+
+    <!-- GOPAY -->
+    <div class="payment" onclick="openPayment('gopay','082372969670')">
+        <div class="left">
+            <img class="logo" src="https://upload.wikimedia.org/wikipedia/commons/8/86/Gopay_logo.svg">
+            <div>
+                <b>GOPAY</b><br>
+                <small>082372969670</small>
+            </div>
+        </div>
+        <div class="btn">PAY</div>
+    </div>
+
+</div>
+
+<script>
+function openPayment(type, number){
+
+    // coba buka aplikasi (deep link)
+    let url = "";
+
+    if(type === "dana"){
+        url = "dana://send?phone=" + number;
+    }
+
+    if(type === "gopay"){
+        url = "gojek://gopay/transfer?phone=" + number;
+    }
+
+    // buka aplikasi
+    window.location.href = url;
+
+    // fallback copy jika gagal
+    setTimeout(() => {
+        navigator.clipboard.writeText(number);
+        alert(type.toUpperCase() + " tidak terbuka.\nNomor sudah dicopy: " + number);
+    }, 800);
+}
+</script>
+
+</body>
+</html>
